@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ketik Solusi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:#f0f4f8;color:#333;scroll-behavior:smooth;overflow-x:hidden;}
+header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);box-shadow:0 5px 25px rgba(0,0,0,0.1);transition:all 0.3s;}
+header .container{display:flex;align-items:center;justify-content:space-between;padding:20px 50px;}
+header img{width:120px;border-radius:50%;transition:all 0.5s;}
+header img:hover{transform:rotate(15deg) scale(1.15);}
+header h1{font-size:2.5rem;font-weight:700;color:#111;text-shadow:1px 1px 3px rgba(255,255,255,0.3);}
+nav ul{list-style:none;display:flex;gap:30px;}
+.tab-menu{position:relative;color:#111;text-decoration:none;font-weight:600;font-size:1rem;padding:5px 0;transition:all 0.3s;text-shadow:0 0 2px rgba(255,255,255,0.5);}
+.tab-menu:hover{color:#ff6a00;transform:scale(1.05);text-shadow:0 0 4px rgba(0,0,0,0.2);}
+.tab-menu::after{content:'';position:absolute;width:0;height:3px;bottom:-5px;left:0;background:#fffd7f;border-radius:3px;transition:0.3s;}
+.tab-menu:hover::after,.tab-menu.active::after{width:100%;}
+.tab-menu.active{color:#ff6a00;text-shadow:0 0 4px rgba(0,0,0,0.2);}
+
+section{padding:100px 20px;max-width:1200px;margin:auto;position:relative;}
+.card,.step-card,.testi-card{background:linear-gradient(145deg,rgba(255,255,255,0.2),rgba(255,255,255,0.1));border-radius:25px;padding:30px 25px;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,0.2);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);transition:all 0.6s;}
+.card:hover,.step-card:hover,.testi-card:hover{transform:translateY(-15px) scale(1.08);box-shadow:0 25px 60px rgba(0,0,0,0.25);}
+.steps,.layanan{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;}
+.step-card span{display:inline-block;width:55px;height:55px;line-height:55px;border-radius:50%;background:linear-gradient(135deg,#00f2fe,#4facfe);color:white;font-weight:700;font-size:1.3rem;margin-bottom:20px;box-shadow:0 5px 25px rgba(0,0,0,0.2);}
+.step-card h3{margin-bottom:15px;font-size:1.35rem;}
+
+/* Hero paralax & glow */
+#home{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 20px;background:linear-gradient(135deg,#00f2fe,#4facfe);color:white;clip-path: polygon(0 0,100% 0,100% 85%,0 100%);overflow:hidden;position:relative;}
+#home::before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,#ffffff20,#ffffff00 70%);animation:rotateBG 20s linear infinite;z-index:0;}
+#home h2,#home p,#home a{position:relative;z-index:1;}
+@keyframes rotateBG{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+#home h2{font-size:3rem;margin-bottom:25px;text-shadow:2px 2px 15px rgba(0,0,0,0.3);animation:slideDown 1s ease forwards;}
+#home p{max-width:720px;font-size:1.2rem;line-height:1.8;margin-bottom:35px;animation:fadeIn 1.2s ease forwards;}
+#home a{padding:15px 35px;background:linear-gradient(270deg,#ff9a00,#ff6a00,#ff9a00);background-size:600% 600%;color:white;border-radius:50px;font-weight:700;font-size:1.2rem;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:all 0.4s;animation:gradientShift 3s ease infinite;}
+#home a:hover{transform:translateY(-5px) scale(1.08);box-shadow:0 15px 45px rgba(0,0,0,0.3);}
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* Testimoni floating */
+.testimoni img{border-radius:50%;margin-bottom:15px;object-fit:cover;border:2px solid white;animation:float 6s ease-in-out infinite alternate;}
+@keyframes float{0%{transform:translateY(0px);}50%{transform:translateY(-10px);}100%{transform:translateY(0px);}}
+
+/* Inputs & buttons */
+input,textarea{width:100%;padding:12px;margin:10px 0;border-radius:12px;border:1px solid rgba(0,0,0,0.2);background: rgba(255,255,255,0.5);backdrop-filter: blur(5px);transition:all 0.3s;}
+input:focus,textarea:focus{border-color:#00f2fe;box-shadow:0 0 15px rgba(0,242,254,0.4);outline:none;}
+button{width:100%;padding:15px;font-size:1.1rem;font-weight:700;border:none;border-radius:50px;background:linear-gradient(135deg,#00f2fe,#4facfe);color:white;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.3);transition:all 0.4s ease;position:relative;overflow:hidden;}
+button::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,0.2);transform:skewX(-20deg);transition:all 0.5s ease;}
+button:hover::after{left:200%;}
+button:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 12px 35px rgba(0,0,0,0.4);}
+
+/* Judul section */
+section h2 {color:#111;text-shadow:1px 1px 3px rgba(0,0,0,0.1);}
+section h3 {color:#333;text-shadow:1px 1px 2px rgba(0,0,0,0.1);}
+
+/* Footer gradient */
+footer{background:linear-gradient(135deg,#111,#333);color:white;text-align:center;padding:40px 20px;font-size:0.95rem;}
+
+/* Brosur hover */
+#brosur img{transition:all 0.4s ease;}
+#brosur img:hover{transform:scale(1.05);box-shadow:0 20px 50px rgba(0,0,0,0.35);}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<div style="display:flex;align-items:center;gap:15px;">
+<img src="image/logo.png" alt="Logo Jasa Joki Ketik">
+<h1>KETIK SOLUSI</h1>
+</div>
+<nav>
+<ul>
+<li><a href="#home" class="tab-menu active">Beranda</a></li>
+<li><a href="#layanan" class="tab-menu">Layanan</a></li>
+<li><a href="#testimoni" class="tab-menu">Testimoni</a></li>
+<li><a href="#carapesan" class="tab-menu">Cara Pesan</a></li>
+<li><a href="#kontak" class="tab-menu">Kontak</a></li>
+<li><a href="#konsultasi" class="tab-menu">Konsultasi</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<section id="home">
+<h2>Butuh jasa mengetik cepat & rapi?</h2>
+<p>Percayakan tugas ketik Anda kepada <strong>Ketik Solusi</strong>! Kami menyediakan layanan mengetik, editing, dan konversi dokumen dengan cepat, rapi, dan profesional.</p>
+<a href="#carapesan">Pesan Sekarang</a>
+</section>
+
+<section id="layanan">
+<h2 style="text-align:center;margin-bottom:40px;">Layanan Kami</h2>
+<div class="steps slide">
+<div class="step-card"><h3>Jasa Mengetik</h3><p>Kami membantu mengetik dokumen Anda dengan cepat, rapi, dan sesuai format.</p></div>
+<div class="step-card"><h3>Editing & Perapian</h3><p>Perbaikan tata letak, ejaan, dan format dokumen agar lebih profesional.</p></div>
+<div class="step-card"><h3>Konversi Dokumen</h3><p>Mengubah tulisan tangan, foto, atau file PDF menjadi dokumen Word/Excel.</p></div>
+<div class="step-card"><h3>Joki Deadline Cepat (Express)</h3><p>Layanan cepat untuk dokumen yang harus selesai dalam hitungan jam.</p></div>
+</div>
+</section>
+
+<section id="testimoni" style="background:linear-gradient(135deg,#e0faff,#ffffff);">
+<h2 style="text-align:center;margin-bottom:40px;">Testimoni Pelanggan</h2>
+<div class="testimoni slide">
+<div class="testi-card"><img src="image/testi1.jpg" alt="Testimoni 1" style="width:150px;height:150px;"><p>"Tugas Studi Kasus"</p></div>
+<div class="testi-card"><img src="image/testi2.jpg" alt="Testimoni 2" style="width:150px;height:150px;"><p>"Tugas Makalah MTK"</p></div>
+<div class="testi-card"><img src="image/testi3.jpg" alt="Testimoni 3" style="width:150px;height:150px;"><p>"Tugas Presentasi"</p></div>
+<div class="testi-card"><img src="image/testi4.jpg" alt="Testimoni 4" style="width:150px;height:150px;"><p>"Tugas Pengantar Akuntan"</p></div>
+<div class="testi-card"><img src="image/testi5.jpg" alt="Testimoni 5" style="width:150px;height:150px;"><p>"Tugas Makalah"</p></div>
+</div>
+</section>
+
+<section id="carapesan">
+<h2 style="text-align:center;margin-bottom:40px;">Cara Pesan</h2>
+<div class="steps slide">
+<div class="step-card"><span>1</span><h3>Kirim Dokumen</h3><p>Kirim file atau foto tulisan yang ingin diketik sesuai instruksi Anda.</p></div>
+<div class="step-card"><span>2</span><h3>Proses Pengerjaan</h3><p>Kami kerjakan dokumen dengan cepat, rapi, dan sesuai deadline.</p></div>
+<div class="step-card"><span>3</span><h3>Terima Hasil</h3><p>File hasil dikirim ke Anda. Lalu lakukan pembayaran sesuai kesepakatan.</p></div>
+</div>
+</section>
+
+<section id="kontak" style="background:linear-gradient(135deg,#e0faff,#ffffff);">
+<h2 style="text-align:center;margin-bottom:40px;">Kontak Kami</h2>
+<div class="steps slide">
+<div class="step-card" style="cursor:pointer;" onclick="window.open('https://wa.me/6285143967392', '_blank')"><span>WA</span><h3>WhatsApp</h3><p>Klik untuk chat langsung dengan kami melalui WhatsApp. Fast response!</p></div>
+<div class="step-card" style="cursor:pointer;" onclick="window.open('https://www.instagram.com/ketik_solusi', '_blank')"><span>IG</span><h3>Instagram</h3><p>Kunjungi akun Instagram kami untuk info layanan, promo, dan update terbaru.</p></div>
+</div>
+</section>
+
+<section id="konsultasi">
+<h2 style="text-align:center;margin-bottom:40px;">Konsultasi</h2>
+<div class="steps slide">
+<div class="step-card"><span>1</span><h3>Hubungi Kami</h3><p>Anda bisa chat via WhatsApp, DM Instagram, atau email untuk konsultasi gratis.</p></div>
+<div class="step-card"><span>2</span><h3>Tanya Layanan & Harga</h3><p>Kami siap menjawab pertanyaan tentang jenis layanan, estimasi waktu, & biaya.</p></div>
+<div class="step-card"><span>3</span><h3>Diskusi Kebutuhan</h3><p>Sampaikan detail dokumen yang ingin Anda ketik atau rapikan sesuai kebutuhan.</p></div>
+</div>
+
+<div style="margin-top:50px; max-width:650px; margin-left:auto; margin-right:auto;">
+<h3 style="text-align:center;margin-bottom:25px;">Form Konsultasi</h3>
+<form action="https://formspree.io/f/yourFormID" method="POST" style="background:rgba(255,255,255,0.25);backdrop-filter:blur(20px);padding:25px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.3);">
+<label for="name">Nama:</label><br>
+<input type="text" id="name" name="name" required><br>
+<label for="email">Email:</label><br>
+<input type="email" id="email" name="_replyto" required><br>
+<label for="message">Pesan / Pertanyaan:</label><br>
+<textarea id="message" name="message" rows="5" required></textarea><br>
+<button type="submit">Kirim Konsultasi</button>
+</form>
+</div>
+</section>
+
+<!-- Section Brosur -->
+<section id="brosur" style="padding:80px 20px;text-align:center;background:linear-gradient(135deg,#ffffff,#e0faff);">
+  <h2 style="margin-bottom:40px;color:#111;text-shadow:1px 1px 3px rgba(0,0,0,0.1);">Brosur Kami</h2>
+  <img src="image/brosur.jpg" alt="Brosur Ketik Solusi" 
+     style="width:300px; max-width:100%; height:auto; border-radius:25px; box-shadow:0 15px 40px rgba(0,0,0,0.2); transition:all 0.4s;"/>
+
+</section>
+
+<footer>
+<p>&copy; 2025 Ketik Solusi.</p>
+</footer>
+
+<script>
+const sections=document.querySelectorAll('section');
+const menuItems=document.querySelectorAll('.tab-menu');
+const headerHeight=document.querySelector('header').offsetHeight;
+window.addEventListener('scroll',()=>{
+let current='';
+const scrollPos=window.pageYOffset+headerHeight+5;
+sections.forEach(section=>{
+const sectionTop=section.offsetTop;
+const sectionBottom=section.offsetTop+section.offsetHeight;
+if(scrollPos>=sectionTop&&scrollPos<sectionBottom)current=section.getAttribute('id');
+});
+menuItems.forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+current)a.classList.add('active');});
+document.querySelectorAll('.slide').forEach(el=>{const top=el.getBoundingClientRect().top;if(top<window.innerHeight-100)el.classList.add('show');});
+});
+</script>
+</body>
+</html>
